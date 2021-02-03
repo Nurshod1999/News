@@ -12,13 +12,14 @@ export default function MainTab() {
         title: 'Asosiy',
         headerTitleAlign: 'center',
     })
+
     const categories = [
         { name: 'Drama', icon: <Icon.PenTool color="black" width={18} /> },
         { name: 'Tragediya', icon: <Icon.PenTool color="black" width={18} /> },
         { name: 'Komediya', icon: <Icon.PenTool color="black" width={18} /> },
         { name: 'Lirika', icon: <Icon.PenTool color="black" width={18} /> },
         { name: 'Klassika', icon: <Icon.PenTool color="black" width={18} /> },
-        { name: 'Gazal', icon: <Icon.PenTool color="black" width={18} /> },
+        { name: 'G`azal', icon: <Icon.PenTool color="black" width={18} /> },
     ]
     const books = [
         { name: 'Sabbai Sayyor', image: sabbai },
@@ -37,11 +38,11 @@ export default function MainTab() {
                     <Search onSubmit={() => console.log('123123')} placeholderTextColor="grey" />
                 </View>
 
-                <View style={styles.search}>
+                <View style={{ marginTop: 20, marginBottom: 10 }}>
                     <Text style={styles.categoryTitle}>Kategoriyalar</Text>
                 </View>
 
-                <View style={{ flexWrap: 'wrap', flexDirection: 'row' }}>
+                <View style={{ flexWrap: 'wrap', flexDirection: 'row', justifyContent: 'center' }}>
                     {categories.map((item) => (
                         <View style={styles.categoryContainer}>
                             <View
@@ -49,18 +50,19 @@ export default function MainTab() {
                                     backgroundColor: 'white',
                                     borderRadius: 50,
                                     height: '100%',
-                                    marginRight: 10,
+                                    marginRight: 5,
                                     width: 25,
                                     alignItems: 'center',
                                 }}>
                                 {item.icon}
                             </View>
+
                             <Text>{item.name}</Text>
                         </View>
                     ))}
                 </View>
 
-                <View style={{ marginTop: 10 }}>
+                <View style={{ marginTop: 20, marginBottom: 10 }}>
                     <Text style={styles.categoryTitle}>Asarlar</Text>
 
                     <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.cards}>
@@ -92,8 +94,9 @@ const styles = StyleSheet.create({
         padding: 8,
         flexDirection: 'row',
         borderRadius: 5,
-        marginRight: 5,
-        marginBottom: 5,
+        marginRight: 10,
+        marginBottom: 10,
+        alignItems: 'center',
     },
     cards: {
         flexDirection: 'row',
