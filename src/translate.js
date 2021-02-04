@@ -118,7 +118,7 @@ const uz = {
     audioBook: 'Audio kitob',
     notFount: 'Hozircha mavjud emas',
     readBook: 'Kitob o`qish',
-    lit: 'Adabiyotat',
+    lit: 'Adabiyot',
     lingu: 'Tilshunoslik',
     history: 'Tarixiy',
     rel: 'Diniy',
