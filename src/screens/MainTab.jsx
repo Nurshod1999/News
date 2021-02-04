@@ -94,9 +94,9 @@ export default function MainTab() {
                     <Search onSubmit={() => console.log('123123')} placeholderTextColor="grey" />
                 </View>
 
-                <View style={{ marginTop: 20, marginBottom: 10 }}>
+                <View style={{ marginTop: 20, marginBottom: 0 }}>
                     <View style={{ flexDirection: 'row' }}>
-                        <Text style={{ ...styles.categoryTitle, width: '80%' }}>{t('works')}</Text>
+                        <Text style={{ ...styles.categoryTitle, width: '80%', marginBottom: 15 }}>{t('works')}</Text>
 
                         <TouchableOpacity onPress={() => navigation.navigate('WorksList', { category: 'all' })}>
                             <Text style={{
@@ -124,7 +124,7 @@ export default function MainTab() {
                     </ScrollView>
                 </View>
 
-                <View style={{ marginTop: 20, marginBottom: 10 }}>
+                <View style={{ marginBottom: 10 }}>
                     <Text style={styles.categoryTitle}>{t('category')}</Text>
                 </View>
 
