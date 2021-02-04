@@ -126,6 +126,7 @@ const uz = {
     disct: 'Lug`at',
     search: 'Qidirish...',
     notFountFavourite: 'Siz xozircha birorta ham kitobni sevimlilar ro`yhatiga qo`shmadingiz 💔',
+    settings: 'Sozlamalar',
 }
 const ru = {
     notFountFavourite: 'Вы еще не добавили ни одной книги в список избранного 💔',
@@ -259,8 +260,10 @@ const ru = {
     audioBook: 'Аудио книга',
     readBook: 'Читая книгу',
     search: 'Поиск...',
+    settings: 'Настройки',
 }
 const en = {
+    settings: 'Settings',
     notFountFavourite: 'You have not added any book to your list of favorites yet 💔',
     search: 'Search...',
     lit: 'Literature',
