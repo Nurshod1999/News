@@ -2,6 +2,7 @@ import React from 'react'
 import { Image, StyleSheet, View, Text, ScrollView } from 'react-native'
 import Container from '../components/common/Container'
 import logo from '../assets/alisherNavoiy.jpg'
+import ramka from '../assets/ramka.png'
 import { useTabBarHeader } from '../hooks/helpers'
 
 export default function InfoTab() {
@@ -12,10 +13,18 @@ export default function InfoTab() {
     return (
         <ScrollView>
             <View>
-                <Image blurRadius={40} source={logo} style={styles.opacityImage} />
+                <Image blurRadius={20} source={logo} style={styles.opacityImage} />
 
                 <View style={styles.logo}>
-                    <Image source={logo} style={{ width: 300, height: 300, borderWidth: 2, borderColor: '#c4c1c1', borderRadius: 1000 }} />
+                    <Image source={logo} style={{
+                        width: 200,
+                        height: 200,
+                        borderRadius: 1000,
+                    }} />
+                </View>
+
+                <View style={styles.ramka}>
+                    <Image source={ramka} style={{ width: 280, height: 280 }} />
                 </View>
             </View>
 
@@ -373,6 +382,13 @@ const styles = StyleSheet.create({
         // opacity: 0.37,
     },
     logo: {
+        width: '100%',
+        height: 400,
+        position: 'absolute',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    ramka: {
         width: '100%',
         height: 400,
         position: 'absolute',
