@@ -19,6 +19,11 @@ export default function MainTab() {
     useTabBarHeader({
         title: 'Asosiy',
         headerTitleAlign: 'center',
+        headerLeft: () => (
+            <TouchableOpacity onPress={() => navigation.navigate('Settings')} style={{ marginLeft: 30 }}>
+                <Icon.Settings color="black" />
+            </TouchableOpacity>
+        ),
     })
 
     const categories = [

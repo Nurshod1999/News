@@ -15,12 +15,15 @@ import WorksList from './screens/WorksList'
 import PDF from './screens/PDF'
 import WorkDetail from './screens/WorkDetail'
 import Gazal from './screens/Gazal'
+import Settings from './screens/Settings'
+import useTrans from './hooks/trans'
 
 const Stack = createStackNavigator()
 const Tab = createBottomTabNavigator()
 
 export default function Navigation() {
     const { headerOptions } = useContext(GlobalContext)
+    const t = useTrans()
 
     return (
         <NavigationContainer theme={{ colors: { background: 'white' } }}>
@@ -31,7 +34,11 @@ export default function Navigation() {
                 }} />
                 <Stack.Screen name="PDF" component={PDF} />
                 <Stack.Screen name="WorksList" component={WorksList} options={{
-                    title: 'Asarlar',
+                    title: t('works'),
+                    headerStyle: styles.headerStyle,
+                }} />
+                <Stack.Screen name="Settings" component={Settings} options={{
+                    title: t('settings'),
                     headerStyle: styles.headerStyle,
                 }} />
             </Stack.Navigator>
