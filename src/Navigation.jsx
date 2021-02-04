@@ -14,6 +14,7 @@ import { GlobalContext } from './contexts/GlobalContext'
 import WorksList from './screens/WorksList'
 import PDF from './screens/PDF'
 import WorkDetail from './screens/WorkDetail'
+import Gazal from './screens/Gazal'
 
 const Stack = createStackNavigator()
 const Tab = createBottomTabNavigator()
@@ -44,9 +45,15 @@ function TabScreen() {
             <Tab.Screen name="MainTab" component={MainTab} options={{
                 tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} icon={Icon.Home} />,
             }} />
+
             <Tab.Screen name="Favourites" component={FavouritesTab} options={{
                 tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} icon={Icon.Heart} />,
             }} />
+
+            <Tab.Screen name="Gazal" component={Gazal} options={{
+                tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} icon={Icon.FileText} />,
+            }} />
+
             <Tab.Screen name="Info" component={InfoTab} options={{
                 tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} icon={Icon.AlertCircle} />,
             }} />
