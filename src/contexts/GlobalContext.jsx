@@ -9,7 +9,7 @@ export function GlobalProvider({ children }) {
     const [user, setUser] = useState(null)
     const [headerOptions, setHeaderOptions] = useState({})
     const [isLoaded, setIsLoaded] = useState(false)
-    const [lang, setLang] = usePersistState('language', 'ru')
+    const [lang, setLang] = usePersistState('language', 'uz')
 
     useEffect(() => {
         AsyncStorage.getItem('token').then((value) => {

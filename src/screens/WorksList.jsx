@@ -1,11 +1,15 @@
 import React from 'react'
-import { ScrollView, View, Text, StyleSheet, Image } from 'react-native'
+import { ScrollView, View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 import image1 from '../assets/images/image1.png'
 import image2 from '../assets/images/image2.png'
 import image3 from '../assets/images/image3.png'
 import { maxLength } from '../utils/maxLength'
 
-export default function WorksList() {
+export default function WorksList({ route }) {
+    const { category } = route.params
+    const navigation = useNavigation()
+
     const books = [
         {
             name: 'TARIXI MULUKI AJAM',
@@ -58,12 +62,17 @@ export default function WorksList() {
         },
     ]
 
+    const categoryBooks = category !== 'all' ? books.filter((item) => item.category === category) : books
+
     return (
         <ScrollView
             showsHorizontalScrollIndicator={false}
             style={{ backgroundColor: '#eeeeee', paddingTop: 10 }}>
-            {books.map((item) => (
-                <View style={styles.card}>
+            {categoryBooks.map((item) => (
+                <TouchableOpacity
+                    activeOpacity={0.7}
+                    onPress={() => navigation.navigate('WorkDetail', { book: item })}
+                    style={styles.card}>
                     <View
                         style={styles.imageContainer}>
                         <Image source={item.image} style={styles.image} />
@@ -80,7 +89,7 @@ export default function WorksList() {
                         </Text>
                         <Text style={{ color: '#717171' }}>{maxLength(item.description, 150)}</Text>
                     </View>
-                </View>
+                </TouchableOpacity>
             ))}
 
             <View style={{ marginBottom: 10 }} />

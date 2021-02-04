@@ -3,9 +3,11 @@ import { TextInput, StyleSheet, View } from 'react-native'
 import { Formik } from 'formik'
 import * as Icon from 'react-native-feather'
 import { colors } from '../../utils/colors'
+import useTrans from '../../hooks/trans'
 
 export default function Search({ style, onSubmit, placeholderTextColor, ...initialValues }) {
     const [value, setValue] = useState('')
+    const t = useTrans()
 
     useEffect(() => {
         onSubmit(value)
@@ -24,7 +26,7 @@ export default function Search({ style, onSubmit, placeholderTextColor, ...initi
                         type="search"
                         value={value}
                         onChangeText={setValue}
-                        placeholder="Qidirmoq..."
+                        placeholder={t('search')}
                         placeholderTextColor={placeholderTextColor}
                         style={{ ...styles.search, ...style }} />
                 </View>
