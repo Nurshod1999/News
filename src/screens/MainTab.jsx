@@ -10,14 +10,13 @@ import image1 from '../assets/images/image1.png'
 import image2 from '../assets/images/image2.png'
 import image3 from '../assets/images/image3.png'
 import image4 from '../assets/images/image4.png'
-import image5 from '../assets/images/image5.png'
-import image6 from '../assets/images/image6.png'
-import image7 from '../assets/images/image7.png'
 import { n } from '../utils/normalize'
-import { Icon1, Icon2, Icon3, Icon4 } from '../components/Svgs'
+import { Icon1, Icon2, Icon3, Icon4, Icon5, Icon6 } from '../components/Svgs'
+import useTrans from '../hooks/trans'
 
 export default function MainTab() {
     const navigation = useNavigation()
+    const t = useTrans()
 
     useTabBarHeader({
         title: 'Asosiy',
@@ -25,22 +24,19 @@ export default function MainTab() {
     })
 
     const categories = [
-        { name: 'Adabiyot', icon: <Icon1 width={30} /> },
-        { name: 'Tilshunoslik', icon: <Icon2 width={30} /> },
-        { name: 'Tarixiy', icon: <Icon3 width={30} /> },
-        { name: 'Diniy', icon: <Icon4 width={30} /> },
-        { name: 'Axloqiy', icon: <Icon4 width={30} /> },
-        { name: 'Lug`at', icon: <Icon4 width={30} /> },
+        { id: 1, name: t('lit'), icon: <Icon1 width={30} /> },
+        { id: 2, name: t('lingu'), icon: <Icon2 width={30} /> },
+        { id: 3, name: t('history'), icon: <Icon3 width={30} /> },
+        { id: 4, name: t('rel'), icon: <Icon4 width={30} /> },
+        { id: 5, name: t('ethic'), icon: <Icon5 width={30} /> },
+        { id: 6, name: t('disct'), icon: <Icon6 width={30} /> },
     ]
 
     const books = [
-        { name: 'Sabbai Sayyor', image: image1, description: 'test description', id: 1 },
-        { name: 'Sabbai Sayyor', image: image2, description: 'test description', id: 2 },
-        { name: 'Sabbai Sayyor', image: image3, description: 'test description', id: 3 },
-        { name: 'Sabbai Sayyor', image: image4, description: 'test description', id: 4 },
-        { name: 'Sabbai Sayyor', image: image5, description: 'test description', id: 5 },
-        { name: 'Sabbai Sayyor', image: image6, description: 'test description', id: 6 },
-        { name: 'Sabbai Sayyor', image: image7, description: 'test description', id: 7 },
+        { name: 'Sabbai Sayyor', image: image1, category: 1, id: 1 },
+        { name: 'Sabbai Sayyor', image: image2, category: 1, id: 2 },
+        { name: 'Sabbai Sayyor', image: image3, category: 2, id: 3 },
+        { name: 'Sabbai Sayyor', image: image4, category: 3, id: 4 },
     ]
 
     return (
@@ -52,15 +48,15 @@ export default function MainTab() {
 
                 <View style={{ marginTop: 20, marginBottom: 10 }}>
                     <View style={{ flexDirection: 'row' }}>
-                        <Text style={{ ...styles.categoryTitle, width: '80%' }}>Asarlar</Text>
+                        <Text style={{ ...styles.categoryTitle, width: '80%' }}>{t('works')}</Text>
 
-                        <TouchableOpacity onPress={() => navigation.navigate('WorksList')}>
+                        <TouchableOpacity onPress={() => navigation.navigate('WorksList', { category: 'all' })}>
                             <Text style={{
                                 ...styles.categoryTitle,
                                 fontWeight: 'normal',
                                 fontSize: 14,
                             }}>
-                                Hammasi
+                                {t('all')}
                             </Text>
                         </TouchableOpacity>
                     </View>
@@ -70,6 +66,7 @@ export default function MainTab() {
                             <TouchableOpacity
                                 onPress={() => navigation.navigate('WorkDetail', { book: item })}
                                 key={item.name}
+                                activeOpacity={0.7}
                                 style={styles.card}>
                                 <Image style={styles.authorImage} source={item.image} />
                                 <View style={styles.shadow} />
@@ -80,18 +77,22 @@ export default function MainTab() {
                 </View>
 
                 <View style={{ marginTop: 20, marginBottom: 10 }}>
-                    <Text style={styles.categoryTitle}>Kategoriyalar</Text>
+                    <Text style={styles.categoryTitle}>{t('category')}</Text>
                 </View>
 
                 <View style={{ flexWrap: 'wrap', flexDirection: 'row', justifyContent: 'center' }}>
                     {categories.map((item) => (
-                        <View key={item.name} style={styles.categoryContainer}>
+                        <TouchableOpacity
+                            onPress={() => navigation.navigate('WorksList', { category: item.id })}
+                            key={item.name}
+                            activeOpacity={0.7}
+                            style={styles.categoryContainer}>
                             <View>
                                 {item.icon}
                             </View>
 
                             <Text style={{ marginTop: 30 }}>{item.name}</Text>
-                        </View>
+                        </TouchableOpacity>
                     ))}
                 </View>
             </Container>

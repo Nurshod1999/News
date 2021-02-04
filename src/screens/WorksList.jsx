@@ -9,23 +9,27 @@ import image6 from '../assets/images/image6.png'
 import image7 from '../assets/images/image7.png'
 import { maxLength } from '../utils/maxLength'
 
-export default function WorksList() {
+export default function WorksList({ route }) {
+    const { category } = route.params
+
     const books = [
-        { name: 'Sabbai Sayyor', image: image1 },
-        { name: 'Sabbai Sayyor', image: image2 },
-        { name: 'Sabbai Sayyor', image: image3 },
-        { name: 'Sabbai Sayyor', image: image4 },
-        { name: 'Sabbai Sayyor', image: image5 },
-        { name: 'Sabbai Sayyor', image: image6 },
-        { name: 'Sabbai Sayyor', image: image7 },
+        { name: 'Sabbai Sayyor', image: image1, category: 1 },
+        { name: 'Sabbai Sayyor', image: image2, category: 1 },
+        { name: 'Sabbai Sayyor', image: image3, category: 2 },
+        { name: 'Sabbai Sayyor', image: image4, category: 3 },
+        { name: 'Sabbai Sayyor', image: image5, category: 4 },
+        { name: 'Sabbai Sayyor', image: image6, category: 5 },
+        { name: 'Sabbai Sayyor', image: image7, category: 6 },
     ]
+
+    const categoryBooks = category !== 'all' ? books.filter((item) => item.category === category) : books
     const text = 'Test test test test Test test test test Test test test test Test test test test Test test test test '
 
     return (
         <ScrollView
             showsHorizontalScrollIndicator={false}
             style={{ backgroundColor: '#eeeeee', paddingTop: 10 }}>
-            {books.map((item) => (
+            {categoryBooks.map((item) => (
                 <View style={styles.card}>
                     <View
                         style={styles.imageContainer}>

@@ -4,10 +4,13 @@ import AsyncStorage from '@react-native-community/async-storage'
 import { useIsFocused } from '@react-navigation/native'
 import { useTabBarHeader } from '../hooks/helpers'
 import FavouriteItem from '../components/FavouriteItem'
+import useTrans from '../hooks/trans'
 
 export default function FavouritesTab(props) {
     const [favourites, setFavourites] = useState([])
     const isFocused = useIsFocused()
+    const t = useTrans()
+
     useTabBarHeader({
         title: 'Sevimlilar',
     })
@@ -34,7 +37,7 @@ export default function FavouritesTab(props) {
             flex: 1,
         }}>
             <Text style={{ textAlign: 'center', fontSize: 20, width: '80%' }}>
-                Siz xozircha birorta ham kitobni sevimlilar ro`yhatiga qo`shmadingiz 💔
+                {t('notFountFavourite')}
             </Text>
         </View>
     )

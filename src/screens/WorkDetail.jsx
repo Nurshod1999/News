@@ -5,11 +5,13 @@ import * as Icon from 'react-native-feather'
 import { useNavigation } from '@react-navigation/native'
 import AsyncStorage from '@react-native-community/async-storage'
 import { n } from '../utils/normalize'
+import useTrans from '../hooks/trans'
 
 export default function WorkDetail({ route }) {
     const { book } = route.params
     const navigation = useNavigation()
     const [favourite, setFavourite] = useState(false)
+    const t = useTrans()
 
     useEffect(() => {
         AsyncStorage.getItem('favourites').then((value) => {
@@ -66,28 +68,28 @@ export default function WorkDetail({ route }) {
                     {book.name}
                 </Text>
 
-                <Text style={{ color: 'white' }}>Alisher Navoiy</Text>
+                <Text style={{ color: 'white' }}>{t('title1')}</Text>
             </View>
 
             <View style={styles.tabReyting}>
                 <View style={{ width: '25%' }}>
-                    <Text style={{ ...styles.tabReytingItem, fontSize: 16 }}>Reyting</Text>
+                    <Text style={{ ...styles.tabReytingItem, fontSize: 16 }}>{t('rate')}</Text>
                     <Text style={styles.tabReytingItem}>5.0</Text>
                 </View>
 
                 <View style={{ width: '25%' }}>
-                    <Text style={{ ...styles.tabReytingItem, fontSize: 16 }}>Sahifalar</Text>
+                    <Text style={{ ...styles.tabReytingItem, fontSize: 16 }}>{t('page')}</Text>
                     <Text style={styles.tabReytingItem}>240</Text>
                 </View>
 
                 <View style={{ width: '25%' }}>
-                    <Text style={{ ...styles.tabReytingItem, fontSize: 16 }}>Til</Text>
+                    <Text style={{ ...styles.tabReytingItem, fontSize: 16 }}>{t('lang')}</Text>
                     <Text style={styles.tabReytingItem}>UZB</Text>
                 </View>
 
                 <View style={{ width: '25%' }}>
-                    <Text style={{ ...styles.tabReytingItem, fontSize: 16 }}>Audio kitob</Text>
-                    <Text style={styles.tabReytingItem}>Mavjud emas</Text>
+                    <Text style={{ ...styles.tabReytingItem, fontSize: 16 }}>{t('audioBook')}</Text>
+                    <Text style={styles.tabReytingItem}>{t('notFount')}</Text>
                 </View>
             </View>
 
@@ -96,7 +98,7 @@ export default function WorkDetail({ route }) {
                     <View style={{ width: '50%', borderRightColor: '#fff', borderRightWidth: 1 }}>
                         <TouchableOpacity onPress={() => navigation.navigate('PDF', { book })}>
                             <Text style={{ ...styles.readTitle }}>
-                                Kitobni o`qish
+                                {t('readBook')}
                             </Text>
                         </TouchableOpacity>
                     </View>
