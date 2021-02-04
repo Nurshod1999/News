@@ -34,13 +34,13 @@ export default function MainTab() {
     ]
 
     const books = [
-        { name: 'Sabbai Sayyor', image: image1 },
-        { name: 'Sabbai Sayyor', image: image2 },
-        { name: 'Sabbai Sayyor', image: image3 },
-        { name: 'Sabbai Sayyor', image: image4 },
-        { name: 'Sabbai Sayyor', image: image5 },
-        { name: 'Sabbai Sayyor', image: image6 },
-        { name: 'Sabbai Sayyor', image: image7 },
+        { name: 'Sabbai Sayyor', image: image1, description: 'test description', id: 1 },
+        { name: 'Sabbai Sayyor', image: image2, description: 'test description', id: 2 },
+        { name: 'Sabbai Sayyor', image: image3, description: 'test description', id: 3 },
+        { name: 'Sabbai Sayyor', image: image4, description: 'test description', id: 4 },
+        { name: 'Sabbai Sayyor', image: image5, description: 'test description', id: 5 },
+        { name: 'Sabbai Sayyor', image: image6, description: 'test description', id: 6 },
+        { name: 'Sabbai Sayyor', image: image7, description: 'test description', id: 7 },
     ]
 
     return (

@@ -1,27 +1,55 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { View, Text, Image, ScrollView, StyleSheet, StatusBar } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import * as Icon from 'react-native-feather'
 import { useNavigation } from '@react-navigation/native'
+import AsyncStorage from '@react-native-community/async-storage'
 import { n } from '../utils/normalize'
 
 export default function WorkDetail({ route }) {
     const { book } = route.params
     const navigation = useNavigation()
+    const [favourite, setFavourite] = useState(false)
+
+    useEffect(() => {
+        AsyncStorage.getItem('favourites').then((value) => {
+            if (JSON.parse(value).filter((i) => i.id === book.id).length === 1) {
+                setFavourite(true)
+            }
+        })
+    }, [book.id])
+
+    async function doFavourite() {
+        const favourites = await AsyncStorage.getItem('favourites')
+
+        if (favourite) {
+            AsyncStorage.setItem(
+                'favourites',
+                JSON.stringify(JSON.parse(favourites || '[]').filter((fav) => fav.id !== book.id)),
+            )
+            setFavourite(false)
+            return
+        }
+
+        AsyncStorage.setItem('favourites', JSON.stringify([...JSON.parse(favourites || '[]'), book]))
+        setFavourite(true)
+    }
 
     return (
         <ScrollView style={styles.container}>
             <StatusBar />
 
-            <View style={styles.topContent}>
+            <View style={styles.back}>
                 <TouchableOpacity onPress={() => navigation.goBack()}>
-                    <Icon.ChevronLeft style={styles.chevronLeft} color="white" width={30} height={30} />
+                    <Icon.ChevronLeft color="white" width={30} height={30} />
                 </TouchableOpacity>
             </View>
 
-            <View style={{ position: 'absolute', zIndex: 1, width: '100%' }}>
-                <TouchableOpacity onPress={() => navigation.goBack()}>
-                    <Icon.Heart style={styles.chevronRight} color="white" width={30} height={30} />
+            <View style={styles.like}>
+                <TouchableOpacity onPress={() => doFavourite()}>
+                    <Icon.Heart
+                        color={favourite ? 'red' : 'white'}
+                        fill={favourite ? 'red' : 'none'} />
                 </TouchableOpacity>
             </View>
 
@@ -59,20 +87,29 @@ export default function WorkDetail({ route }) {
 
                 <View style={{ width: '25%' }}>
                     <Text style={{ ...styles.tabReytingItem, fontSize: 16 }}>Audio kitob</Text>
-                    <Text style={styles.tabReytingItem}>2 soat</Text>
+                    <Text style={styles.tabReytingItem}>Mavjud emas</Text>
                 </View>
             </View>
 
             <View style={styles.containerRead}>
                 <View style={{ flex: 1, flexDirection: 'row' }}>
-                    <View style={{ width: '50%' }}>
-                        <Text style={{ ...styles.readTitle, borderRightWidth: 2, borderRightColor: 'white' }}>
-                            Read book
-                        </Text>
+                    <View style={{ width: '50%', borderRightColor: '#fff', borderRightWidth: 1 }}>
+                        <TouchableOpacity onPress={() => navigation.navigate('PDF', { book })}>
+                            <Text style={{ ...styles.readTitle }}>
+                                Kitobni o`qish
+                            </Text>
+                        </TouchableOpacity>
                     </View>
 
-                    <View style={{ width: '50%' }}>
-                        <Text style={styles.readTitle}>Play book</Text>
+                    <View style={{
+                        width: '50%',
+                        borderLeftColor: '#fff',
+                        borderLeftWidth: 1,
+                        backgroundColor: '#898888',
+                        borderTopRightRadius: 15,
+                        borderBottomRightRadius: 15,
+                    }}>
+                        <Text style={styles.readTitle}>Audio kitobni eshitish</Text>
                     </View>
                 </View>
             </View>
@@ -162,20 +199,28 @@ const styles = StyleSheet.create({
     aboutContainer: {
         marginHorizontal: 30,
     },
-    topContent: {
+    back: {
         position: 'absolute',
         zIndex: 1,
-        flexDirection: 'row',
+        top: 10,
+        left: 10,
+        width: 40,
+        height: 40,
+        borderRadius: 100,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#000000',
     },
-    chevronLeft: {
-        marginLeft: 10,
-        marginTop: 10,
+    like: {
+        position: 'absolute',
         zIndex: 1,
-    },
-    chevronRight: {
-        marginLeft: 10,
-        marginTop: 10,
-        zIndex: 1,
-        left: '85%',
+        top: 10,
+        right: 10,
+        width: 40,
+        height: 40,
+        borderRadius: 100,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#000000',
     },
 })

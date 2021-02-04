@@ -12,6 +12,7 @@ import MainTab from './screens/MainTab'
 import { n } from './utils/normalize'
 import { GlobalContext } from './contexts/GlobalContext'
 import WorksList from './screens/WorksList'
+import PDF from './screens/PDF'
 import WorkDetail from './screens/WorkDetail'
 
 const Stack = createStackNavigator()
@@ -27,6 +28,7 @@ export default function Navigation() {
                 <Stack.Screen name="WorkDetail" component={WorkDetail} options={{
                     headerShown: false,
                 }} />
+                <Stack.Screen name="PDF" component={PDF} />
                 <Stack.Screen name="WorksList" component={WorksList} options={{
                     title: 'Asarlar',
                     headerStyle: styles.headerStyle,

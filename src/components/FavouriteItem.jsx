@@ -2,15 +2,23 @@ import React, { useState } from 'react'
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
 import Heart from 'react-native-feather/src/icons/Heart'
 import AsyncStorage from '@react-native-community/async-storage'
+import { useNavigation } from '@react-navigation/native'
 
 export default function FavouritesTab({ item }) {
     const [favourite, setFavourite] = useState(true)
+    const navigation = useNavigation()
 
     async function changeFavourite() {
         const favourites = await AsyncStorage.getItem('favourites')
 
         if (favourite) {
-            AsyncStorage.setItem('favourites', JSON.stringify(JSON.parse(favourites || '[]').filter((fav) => fav.id !== item.id)))
+            AsyncStorage.setItem(
+                'favourites',
+                JSON.stringify(
+                    JSON.parse(favourites || '[]').filter((fav) => fav.id !== item.id),
+                ),
+            )
+
             setFavourite(false)
             return
         }
@@ -21,16 +29,20 @@ export default function FavouritesTab({ item }) {
 
     return (
         <View style={styles.item}>
-            <Image source={item.image} style={styles.image} />
+            <TouchableOpacity onPress={() => navigation.navigate('WorkDetail', { book: item })}>
+                <View style={{ flexDirection: 'row' }}>
+                    <Image source={item.image} style={styles.image} />
 
-            <View style={{ width: '50%' }}>
-                <Text style={styles.name}>{item.name}</Text>
-                <Text style={styles.description}>{item.description}</Text>
-            </View>
+                    <View style={{ width: '50%' }}>
+                        <Text style={styles.name}>{item.name}</Text>
+                        <Text style={styles.description}>{item.description}</Text>
+                    </View>
+                </View>
+            </TouchableOpacity>
 
             <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                 <TouchableOpacity onPress={changeFavourite}>
-                    <Heart fill={favourite ? 'red' : 'none'} style={{ color: 'red' }} />
+                    <Heart fill={favourite ? 'red' : 'none'} color="red" />
                 </TouchableOpacity>
             </View>
         </View>
@@ -43,7 +55,7 @@ const styles = StyleSheet.create({
     },
     image: {
         borderRadius: 10,
-        width: '25%',
+        width: '28%',
         height: 135,
         margin: 20,
     },
