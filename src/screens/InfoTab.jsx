@@ -11,7 +11,7 @@ export default function InfoTab() {
     })
 
     return (
-        <ScrollView>
+        <ScrollView showsVerticalScrollIndicator={false}>
             <View>
                 <Image blurRadius={20} source={logo} style={styles.opacityImage} />
 

@@ -12,6 +12,7 @@ import MainTab from './screens/MainTab'
 import { n } from './utils/normalize'
 import { GlobalContext } from './contexts/GlobalContext'
 import WorksList from './screens/WorksList'
+import WorkDetail from './screens/WorkDetail'
 
 const Stack = createStackNavigator()
 const Tab = createBottomTabNavigator()
@@ -23,6 +24,9 @@ export default function Navigation() {
         <NavigationContainer theme={{ colors: { background: 'white' } }}>
             <Stack.Navigator initialRouteName="TabScreen" screenOptions={{ headerStyle: styles.stackHeader }}>
                 <Stack.Screen name="TabScreen" component={TabScreen} options={headerOptions} />
+                <Stack.Screen name="WorkDetail" component={WorkDetail} options={{
+                    headerShown: false,
+                }} />
                 <Stack.Screen name="WorksList" component={WorksList} options={{
                     title: 'Asarlar',
                     headerStyle: styles.headerStyle,

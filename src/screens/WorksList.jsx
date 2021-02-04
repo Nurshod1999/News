@@ -29,7 +29,7 @@ export default function WorksList() {
                 <View style={styles.card}>
                     <View
                         style={styles.imageContainer}>
-                        <Image source={item.image} style={{ borderBottomLeftRadius: 10, borderTopLeftRadius: 10, width: 90, height: 135 }} />
+                        <Image source={item.image} style={styles.image} />
                     </View>
 
                     <View style={styles.textContainer}>
@@ -74,5 +74,11 @@ const styles = StyleSheet.create({
         padding: 10,
         borderTopRightRadius: 10,
         borderBottomRightRadius: 10,
+    },
+    image: {
+        borderBottomLeftRadius: 10,
+        borderTopLeftRadius: 10,
+        width: 90,
+        height: 135,
     },
 })

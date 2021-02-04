@@ -14,6 +14,7 @@ import image5 from '../assets/images/image5.png'
 import image6 from '../assets/images/image6.png'
 import image7 from '../assets/images/image7.png'
 import { n } from '../utils/normalize'
+import { Icon1, Icon2, Icon3, Icon4 } from '../components/Svgs'
 
 export default function MainTab() {
     const navigation = useNavigation()
@@ -24,12 +25,12 @@ export default function MainTab() {
     })
 
     const categories = [
-        { name: 'Drama', icon: <Icon.PenTool color="black" width={18} /> },
-        { name: 'Tragediya', icon: <Icon.PenTool color="black" width={18} /> },
-        { name: 'Komediya', icon: <Icon.PenTool color="black" width={18} /> },
-        { name: 'Lirika', icon: <Icon.PenTool color="black" width={18} /> },
-        { name: 'Klassika', icon: <Icon.PenTool color="black" width={18} /> },
-        { name: 'G`azal', icon: <Icon.PenTool color="black" width={18} /> },
+        { name: 'Adabiyot', icon: <Icon1 width={30} /> },
+        { name: 'Tilshunoslik', icon: <Icon2 width={30} /> },
+        { name: 'Tarixiy', icon: <Icon3 width={30} /> },
+        { name: 'Diniy', icon: <Icon4 width={30} /> },
+        { name: 'Axloqiy', icon: <Icon4 width={30} /> },
+        { name: 'Lug`at', icon: <Icon4 width={30} /> },
     ]
 
     const books = [
@@ -50,30 +51,6 @@ export default function MainTab() {
                 </View>
 
                 <View style={{ marginTop: 20, marginBottom: 10 }}>
-                    <Text style={styles.categoryTitle}>Kategoriyalar</Text>
-                </View>
-
-                <View style={{ flexWrap: 'wrap', flexDirection: 'row', justifyContent: 'center' }}>
-                    {categories.map((item) => (
-                        <View key={item.name} style={styles.categoryContainer}>
-                            <View
-                                style={{
-                                    backgroundColor: 'white',
-                                    borderRadius: 50,
-                                    height: '100%',
-                                    marginRight: 5,
-                                    width: 25,
-                                    alignItems: 'center',
-                                }}>
-                                {item.icon}
-                            </View>
-
-                            <Text>{item.name}</Text>
-                        </View>
-                    ))}
-                </View>
-
-                <View style={{ marginTop: 20, marginBottom: 10 }}>
                     <View style={{ flexDirection: 'row' }}>
                         <Text style={{ ...styles.categoryTitle, width: '80%' }}>Asarlar</Text>
 
@@ -90,13 +67,32 @@ export default function MainTab() {
 
                     <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.cards}>
                         {books.map((item) => (
-                            <View key={item.name} style={styles.card}>
+                            <TouchableOpacity
+                                onPress={() => navigation.navigate('WorkDetail', { book: item })}
+                                key={item.name}
+                                style={styles.card}>
                                 <Image style={styles.authorImage} source={item.image} />
                                 <View style={styles.shadow} />
                                 <Text style={styles.authorName}>{item.name}</Text>
-                            </View>
+                            </TouchableOpacity>
                         ))}
                     </ScrollView>
+                </View>
+
+                <View style={{ marginTop: 20, marginBottom: 10 }}>
+                    <Text style={styles.categoryTitle}>Kategoriyalar</Text>
+                </View>
+
+                <View style={{ flexWrap: 'wrap', flexDirection: 'row', justifyContent: 'center' }}>
+                    {categories.map((item) => (
+                        <View key={item.name} style={styles.categoryContainer}>
+                            <View>
+                                {item.icon}
+                            </View>
+
+                            <Text style={{ marginTop: 30 }}>{item.name}</Text>
+                        </View>
+                    ))}
                 </View>
             </Container>
         </ScrollView>
@@ -115,10 +111,11 @@ const styles = StyleSheet.create({
     categoryContainer: {
         backgroundColor: colors.WHITER,
         padding: 8,
-        flexDirection: 'row',
         borderRadius: 5,
         marginRight: 10,
         marginBottom: 10,
+        width: 100,
+        height: 100,
         alignItems: 'center',
     },
     cards: {
