@@ -1,6 +1,7 @@
 import React from 'react'
 import { View, StyleSheet, Text, ScrollView, Image, TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
+import * as Icon from 'react-native-feather'
 import Container from '../components/common/Container'
 import Search from '../components/common/Search'
 import { useTabBarHeader } from '../hooks/helpers'
@@ -9,7 +10,7 @@ import image1 from '../assets/images/image1.png'
 import image2 from '../assets/images/image2.png'
 import image3 from '../assets/images/image3.png'
 import { n } from '../utils/normalize'
-import { Icon1, Icon2, Icon3, Icon4, Icon5, Icon6 } from '../components/Svgs'
+import { Icon1, Icon2, Icon3, Icon4 } from '../components/Svgs'
 import useTrans from '../hooks/trans'
 
 export default function MainTab() {
