@@ -1,5 +1,6 @@
 import React from 'react'
-import { ScrollView, View, Text, StyleSheet, Image } from 'react-native'
+import { ScrollView, View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 import image1 from '../assets/images/image1.png'
 import image2 from '../assets/images/image2.png'
 import image3 from '../assets/images/image3.png'
@@ -11,15 +12,16 @@ import { maxLength } from '../utils/maxLength'
 
 export default function WorksList({ route }) {
     const { category } = route.params
+    const navigation = useNavigation()
 
     const books = [
-        { name: 'Sabbai Sayyor', image: image1, category: 1 },
-        { name: 'Sabbai Sayyor', image: image2, category: 1 },
-        { name: 'Sabbai Sayyor', image: image3, category: 2 },
-        { name: 'Sabbai Sayyor', image: image4, category: 3 },
-        { name: 'Sabbai Sayyor', image: image5, category: 4 },
-        { name: 'Sabbai Sayyor', image: image6, category: 5 },
-        { name: 'Sabbai Sayyor', image: image7, category: 6 },
+        { name: 'Sabbai Sayyor', image: image1, category: 1, id: 1 },
+        { name: 'Sabbai Sayyor', image: image2, category: 2, id: 2 },
+        { name: 'Sabbai Sayyor', image: image3, category: 3, id: 3 },
+        { name: 'Sabbai Sayyor', image: image4, category: 4, id: 4 },
+        { name: 'Sabbai Sayyor', image: image5, category: 5, id: 5 },
+        { name: 'Sabbai Sayyor', image: image6, category: 6, id: 6 },
+        { name: 'Sabbai Sayyor', image: image7, category: 7, id: 7 },
     ]
 
     const categoryBooks = category !== 'all' ? books.filter((item) => item.category === category) : books
@@ -30,7 +32,10 @@ export default function WorksList({ route }) {
             showsHorizontalScrollIndicator={false}
             style={{ backgroundColor: '#eeeeee', paddingTop: 10 }}>
             {categoryBooks.map((item) => (
-                <View style={styles.card}>
+                <TouchableOpacity
+                    activeOpacity={0.7}
+                    onPress={() => navigation.navigate('WorkDetail', { book: item })}
+                    style={styles.card}>
                     <View
                         style={styles.imageContainer}>
                         <Image source={item.image} style={styles.image} />
@@ -47,7 +52,7 @@ export default function WorksList({ route }) {
                         </Text>
                         <Text style={{ color: '#717171' }}>{maxLength(text, 150)}</Text>
                     </View>
-                </View>
+                </TouchableOpacity>
             ))}
 
             <View style={{ marginBottom: 10 }} />
