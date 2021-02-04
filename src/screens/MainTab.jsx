@@ -1,13 +1,23 @@
 import React from 'react'
-import { View, StyleSheet, Text, ScrollView, Image } from 'react-native'
+import { View, StyleSheet, Text, ScrollView, Image, TouchableOpacity } from 'react-native'
 import * as Icon from 'react-native-feather'
+import { useNavigation } from '@react-navigation/native'
 import Container from '../components/common/Container'
 import Search from '../components/common/Search'
 import { useTabBarHeader } from '../hooks/helpers'
 import { colors } from '../utils/colors'
-import sabbai from '../assets/images/sabbaiSayyor.png'
+import image1 from '../assets/images/image1.png'
+import image2 from '../assets/images/image2.png'
+import image3 from '../assets/images/image3.png'
+import image4 from '../assets/images/image4.png'
+import image5 from '../assets/images/image5.png'
+import image6 from '../assets/images/image6.png'
+import image7 from '../assets/images/image7.png'
+import { n } from '../utils/normalize'
 
 export default function MainTab() {
+    const navigation = useNavigation()
+
     useTabBarHeader({
         title: 'Asosiy',
         headerTitleAlign: 'center',
@@ -21,18 +31,19 @@ export default function MainTab() {
         { name: 'Klassika', icon: <Icon.PenTool color="black" width={18} /> },
         { name: 'G`azal', icon: <Icon.PenTool color="black" width={18} /> },
     ]
+
     const books = [
-        { name: 'Sabbai Sayyor', image: sabbai },
-        { name: 'Sabbai Sayyor', image: sabbai },
-        { name: 'Sabbai Sayyor', image: sabbai },
-        { name: 'Sabbai Sayyor', image: sabbai },
-        { name: 'Sabbai Sayyor', image: sabbai },
-        { name: 'Sabbai Sayyor', image: sabbai },
-        { name: 'Sabbai Sayyor', image: sabbai },
+        { name: 'Sabbai Sayyor', image: image1 },
+        { name: 'Sabbai Sayyor', image: image2 },
+        { name: 'Sabbai Sayyor', image: image3 },
+        { name: 'Sabbai Sayyor', image: image4 },
+        { name: 'Sabbai Sayyor', image: image5 },
+        { name: 'Sabbai Sayyor', image: image6 },
+        { name: 'Sabbai Sayyor', image: image7 },
     ]
 
     return (
-        <View style={{ flex: 1 }}>
+        <ScrollView style={{ flex: 1 }}>
             <Container>
                 <View style={styles.search}>
                     <Search onSubmit={() => console.log('123123')} placeholderTextColor="grey" />
@@ -44,7 +55,7 @@ export default function MainTab() {
 
                 <View style={{ flexWrap: 'wrap', flexDirection: 'row', justifyContent: 'center' }}>
                     {categories.map((item) => (
-                        <View style={styles.categoryContainer}>
+                        <View key={item.name} style={styles.categoryContainer}>
                             <View
                                 style={{
                                     backgroundColor: 'white',
@@ -63,11 +74,23 @@ export default function MainTab() {
                 </View>
 
                 <View style={{ marginTop: 20, marginBottom: 10 }}>
-                    <Text style={styles.categoryTitle}>Asarlar</Text>
+                    <View style={{ flexDirection: 'row' }}>
+                        <Text style={{ ...styles.categoryTitle, width: '80%' }}>Asarlar</Text>
+
+                        <TouchableOpacity onPress={() => navigation.navigate('WorksList')}>
+                            <Text style={{
+                                ...styles.categoryTitle,
+                                fontWeight: 'normal',
+                                fontSize: 14,
+                            }}>
+                                Hammasi
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
 
                     <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.cards}>
                         {books.map((item) => (
-                            <View style={styles.card}>
+                            <View key={item.name} style={styles.card}>
                                 <Image style={styles.authorImage} source={item.image} />
                                 <View style={styles.shadow} />
                                 <Text style={styles.authorName}>{item.name}</Text>
@@ -76,7 +99,7 @@ export default function MainTab() {
                     </ScrollView>
                 </View>
             </Container>
-        </View>
+        </ScrollView>
     )
 }
 
@@ -102,21 +125,19 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     card: {
-        width: 130,
-        height: 180,
-        borderRadius: 20,
+        width: n(130),
+        height: n(200),
         alignItems: 'center',
         justifyContent: 'flex-end',
         marginRight: 12,
-        backgroundColor: 'black',
     },
     authorImage: {
         width: '100%',
-        height: '100%',
-        position: 'absolute',
+        height: '80%',
+        borderRadius: 10,
     },
     authorName: {
-        color: '#fff',
+        color: 'black',
         paddingVertical: 10,
     },
 })

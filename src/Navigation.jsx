@@ -11,6 +11,7 @@ import MainTab from './screens/MainTab'
 
 import { n } from './utils/normalize'
 import { GlobalContext } from './contexts/GlobalContext'
+import WorksList from './screens/WorksList'
 
 const Stack = createStackNavigator()
 const Tab = createBottomTabNavigator()
@@ -22,6 +23,10 @@ export default function Navigation() {
         <NavigationContainer theme={{ colors: { background: 'white' } }}>
             <Stack.Navigator initialRouteName="TabScreen" screenOptions={{ headerStyle: styles.stackHeader }}>
                 <Stack.Screen name="TabScreen" component={TabScreen} options={headerOptions} />
+                <Stack.Screen name="WorksList" component={WorksList} options={{
+                    title: 'Asarlar',
+                    headerStyle: styles.headerStyle,
+                }} />
             </Stack.Navigator>
         </NavigationContainer>
     )
@@ -45,7 +50,7 @@ function TabScreen() {
 
 const styles = StyleSheet.create({
     tabHeader: {
-        backgroundColor: '#006D77',
+        backgroundColor: '#8349fe',
         width: '100%',
         height: '12%',
         paddingHorizontal: n(35),
@@ -57,5 +62,8 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         elevation: 0,
         shadowOpacity: 0,
+    },
+    headerStyle: {
+        backgroundColor: '#f5f4f4',
     },
 })

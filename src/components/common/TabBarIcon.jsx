@@ -5,14 +5,14 @@ import { n } from '../../utils/normalize'
 export default function TabBarIcon({ focused, icon: Icon }) {
     return (
         <View style={focused ? styles.active : styles.inactive}>
-            <Icon color="white" style={styles.block} />
+            <Icon color={focused ? '#6030c9' : 'white'} style={styles.block} />
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     active: {
-        backgroundColor: '#FFC542',
+        backgroundColor: 'white',
         borderRadius: n(100),
     },
     inactive: {
