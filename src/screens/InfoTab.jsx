@@ -12,10 +12,10 @@ export default function InfoTab() {
     return (
         <ScrollView>
             <View>
-                <Image source={logo} style={styles.opacityImage} />
+                <Image blurRadius={40} source={logo} style={styles.opacityImage} />
 
                 <View style={styles.logo}>
-                    <Image source={logo} style={{ width: 250, height: 250, borderRadius: 125 }} />
+                    <Image source={logo} style={{ width: 300, height: 300, borderWidth: 2, borderColor: '#c4c1c1', borderRadius: 1000 }} />
                 </View>
             </View>
 
@@ -370,7 +370,7 @@ const styles = StyleSheet.create({
     opacityImage: {
         width: '100%',
         height: 400,
-        opacity: 0.15,
+        // opacity: 0.37,
     },
     logo: {
         width: '100%',
