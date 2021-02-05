@@ -4,9 +4,9 @@
     "slug": "AlisherNavoiy",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./src/assets/icon.png",
+    "icon": "./src/assets/favicon.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./src/assets/favicon.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -20,7 +20,11 @@
       "supportsTablet": true
     },
     "android": {
-      "package": "com.alishernavoiy"
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#FFFFFF"
+      },
+      "package": "com.miranshakh.AlisherNavoiy"
     },
     "web": {
       "favicon": "./assets/favicon.png"
