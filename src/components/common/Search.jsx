@@ -4,14 +4,16 @@ import { Formik } from 'formik'
 import * as Icon from 'react-native-feather'
 import { colors } from '../../utils/colors'
 import useTrans from '../../hooks/trans'
+import useDebounce from '../../hooks/useDebounce'
 
 export default function Search({ style, onSubmit, placeholderTextColor, ...initialValues }) {
     const [value, setValue] = useState('')
     const t = useTrans()
+    const debouncedValue = useDebounce(value, 300)
 
     useEffect(() => {
         onSubmit(value)
-    }, [])
+    }, [debouncedValue])
 
     return (
         <Formik onSubmit={onSubmit} initialValues={{ search: '', ...initialValues }}>

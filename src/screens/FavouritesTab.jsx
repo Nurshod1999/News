@@ -13,6 +13,7 @@ export default function FavouritesTab(props) {
 
     useTabBarHeader({
         title: 'Sevimlilar',
+        headerTitleAlign: 'center',
     })
 
     useEffect(() => {

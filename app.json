@@ -4,10 +4,10 @@
     "slug": "AlisherNavoiy",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./src/assets/favicon.png",
+    "icon": "./src/assets/main-icon.png",
     "splash": {
-      "image": "./src/assets/favicon.png",
-      "resizeMode": "contain",
+      "image": "./src/assets/main-splash.png",
+      "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
     "updates": {

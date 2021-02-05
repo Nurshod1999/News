@@ -3,6 +3,7 @@ import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
 import Heart from 'react-native-feather/src/icons/Heart'
 import AsyncStorage from '@react-native-community/async-storage'
 import { useNavigation } from '@react-navigation/native'
+import { maxLength } from '../utils/maxLength'
 
 export default function FavouritesTab({ item }) {
     const [favourite, setFavourite] = useState(true)
@@ -35,7 +36,7 @@ export default function FavouritesTab({ item }) {
 
                     <View style={{ width: '50%' }}>
                         <Text style={styles.name}>{item.name}</Text>
-                        <Text style={styles.description}>{item.description}</Text>
+                        <Text style={styles.description}>{maxLength(item.description, 100)}</Text>
                     </View>
                 </View>
             </TouchableOpacity>

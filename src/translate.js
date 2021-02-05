@@ -127,8 +127,10 @@ const uz = {
     search: 'Qidirish...',
     notFountFavourite: 'Siz xozircha birorta ham kitobni sevimlilar ro`yhatiga qo`shmadingiz 💔',
     settings: 'Sozlamalar',
+    about: 'Nima haqida?',
 }
 const ru = {
+    about: 'О чем?',
     notFountFavourite: 'Вы еще не добавили ни одной книги в список избранного 💔',
     lit: 'Литература',
     lingu: 'Лингвистика',
@@ -263,6 +265,7 @@ const ru = {
     settings: 'Настройки',
 }
 const en = {
+    about: 'About what?',
     settings: 'Settings',
     notFountFavourite: 'You have not added any book to your list of favorites yet 💔',
     search: 'Search...',

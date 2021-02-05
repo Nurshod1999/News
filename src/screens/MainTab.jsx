@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View, StyleSheet, Text, ScrollView, Image, TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import * as Icon from 'react-native-feather'
@@ -12,9 +12,11 @@ import image3 from '../assets/images/image3.png'
 import { n } from '../utils/normalize'
 import { Icon1, Icon2, Icon3, Icon4 } from '../components/Svgs'
 import useTrans from '../hooks/trans'
+import { maxLength } from '../utils/maxLength'
 
 export default function MainTab() {
     const navigation = useNavigation()
+    const [search, setSearch] = useState('')
     const t = useTrans()
 
     useTabBarHeader({
@@ -93,62 +95,103 @@ export default function MainTab() {
         },
     ]
 
+    const searchResults = books.filter((item) => item.name.includes(search))
+
     return (
         <ScrollView style={{ flex: 1 }}>
             <Container>
-                <View style={styles.search}>
-                    <Search onSubmit={() => console.log('123123')} placeholderTextColor="grey" />
-                </View>
+                {search === '' ? (
+                    <View>
+                        <View style={styles.search}>
+                            <Search onSubmit={setSearch} placeholderTextColor="grey" />
+                        </View>
 
-                <View style={{ marginTop: 20, marginBottom: 0 }}>
-                    <View style={{ flexDirection: 'row' }}>
-                        <Text style={{ ...styles.categoryTitle, width: '80%', marginBottom: 15 }}>{t('works')}</Text>
+                        <View style={{ marginTop: 20, marginBottom: 0 }}>
+                            <View style={{ flexDirection: 'row' }}>
+                                <Text style={{ ...styles.categoryTitle, width: '80%', marginBottom: 15 }}>{t('works')}</Text>
 
-                        <TouchableOpacity onPress={() => navigation.navigate('WorksList', { category: 'all' })}>
-                            <Text style={{
-                                ...styles.categoryTitle,
-                                fontWeight: 'normal',
-                                fontSize: 14,
-                            }}>
-                                {t('all')}
-                            </Text>
-                        </TouchableOpacity>
-                    </View>
-
-                    <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.cards}>
-                        {books.map((item) => (
-                            <TouchableOpacity
-                                onPress={() => navigation.navigate('WorkDetail', { book: item })}
-                                key={item.name}
-                                activeOpacity={0.7}
-                                style={styles.card}>
-                                <Image style={styles.authorImage} source={item.image} />
-                                <View style={styles.shadow} />
-                                <Text style={styles.authorName}>{item.name}</Text>
-                            </TouchableOpacity>
-                        ))}
-                    </ScrollView>
-                </View>
-
-                <View style={{ marginBottom: 10 }}>
-                    <Text style={styles.categoryTitle}>{t('category')}</Text>
-                </View>
-
-                <View style={{ flexWrap: 'wrap', flexDirection: 'row', justifyContent: 'center' }}>
-                    {categories.map((item) => (
-                        <TouchableOpacity
-                            onPress={() => navigation.navigate('WorksList', { category: item.id })}
-                            key={item.name}
-                            activeOpacity={0.7}
-                            style={styles.categoryContainer}>
-                            <View>
-                                {item.icon}
+                                <TouchableOpacity onPress={() => navigation.navigate('WorksList', { category: 'all' })}>
+                                    <Text style={{
+                                        ...styles.categoryTitle,
+                                        fontWeight: 'normal',
+                                        fontSize: 14,
+                                    }}>
+                                        {t('all')}
+                                    </Text>
+                                </TouchableOpacity>
                             </View>
 
-                            <Text style={{ marginTop: 30 }}>{item.name}</Text>
-                        </TouchableOpacity>
-                    ))}
-                </View>
+                            <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.cards}>
+                                {books.map((item) => (
+                                    <TouchableOpacity
+                                        onPress={() => navigation.navigate('WorkDetail', { book: item })}
+                                        key={item.name}
+                                        activeOpacity={0.7}
+                                        style={styles.card}>
+                                        <Image style={styles.authorImage} source={item.image} />
+                                        <View style={styles.shadow} />
+                                        <Text style={styles.authorName}>{item.name}</Text>
+                                    </TouchableOpacity>
+                                ))}
+                            </ScrollView>
+                        </View>
+
+                        <View style={{ marginBottom: 10 }}>
+                            <Text style={styles.categoryTitle}>{t('category')}</Text>
+                        </View>
+
+                        <View style={{ flexWrap: 'wrap', flexDirection: 'row', justifyContent: 'center' }}>
+                            {categories.map((item) => (
+                                <TouchableOpacity
+                                    onPress={() => navigation.navigate('WorksList', { category: item.id })}
+                                    key={item.name}
+                                    activeOpacity={0.7}
+                                    style={styles.categoryContainer}>
+                                    <View>
+                                        {item.icon}
+                                    </View>
+
+                                    <Text style={{ marginTop: 30 }}>{item.name}</Text>
+                                </TouchableOpacity>
+                            ))}
+                        </View>
+                    </View>
+                ) : (
+                    <View>
+                        <View style={styles.search}>
+                            <Search onSubmit={setSearch} placeholderTextColor="grey" />
+                        </View>
+
+                        {searchResults.map((item) => (
+                            <ScrollView
+                                showsHorizontalScrollIndicator={false}
+                                style={{ paddingTop: 20 }}>
+                                <TouchableOpacity
+                                    activeOpacity={0.7}
+                                    onPress={() => navigation.navigate('WorkDetail', { book: item })}
+                                    style={styles.cardSearch}>
+                                    <View
+                                        style={styles.imageContainer}>
+                                        <Image source={item.image} style={styles.image} />
+                                    </View>
+
+                                    <View style={styles.textContainer}>
+                                        <Text style={{
+                                            fontSize: 18,
+                                            color: '#262626',
+                                            fontWeight: 'bold',
+                                            marginBottom: 5,
+                                        }}>
+                                            {item.name}
+                                        </Text>
+                                        <Text style={{ color: '#717171' }}>{maxLength(item.description, 150)}</Text>
+                                    </View>
+                                </TouchableOpacity>
+                                <View style={{ marginBottom: 10 }} />
+                            </ScrollView>
+                        ))}
+                    </View>
+                )}
             </Container>
         </ScrollView>
     )
@@ -192,4 +235,34 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         textAlign: 'center',
     },
+    cardSearch: {
+        elevation: 3,
+        width: '95%',
+        borderRadius: 10,
+        height: 150,
+        flexDirection: 'row',
+        backgroundColor: 'white',
+        marginHorizontal: 10,
+        marginBottom: 10,
+    },
+    imageContainer: {
+        width: '28%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderTopLeftRadius: 10,
+        borderBottomLeftRadius: 10,
+    },
+    textContainer: {
+        width: '72%',
+        padding: 10,
+        borderTopRightRadius: 10,
+        borderBottomRightRadius: 10,
+    },
+    image: {
+        borderBottomLeftRadius: 10,
+        borderTopLeftRadius: 10,
+        width: 90,
+        height: 135,
+    },
+
 })

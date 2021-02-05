@@ -111,26 +111,18 @@ export default function WorkDetail({ route }) {
                         borderTopRightRadius: 15,
                         borderBottomRightRadius: 15,
                     }}>
-                        <Text style={styles.readTitle}>Audio kitobni eshitish</Text>
+                        <Text style={styles.readTitle}>{t('audioBook')}</Text>
                     </View>
                 </View>
             </View>
 
             <View style={styles.aboutContainer}>
                 <Text style={{ fontSize: 18, fontWeight: 'bold', marginBottom: 10, color: '#262626' }}>
-                    Nima haqida?
+                    {t('about')}
                 </Text>
 
                 <Text style={{ color: '#717171', marginBottom: 10 }}>
-                    Alisher Navoiy juda yaxshi inson bo'lgan. Test for test, test for test
-                </Text>
-
-                <Text style={{ fontSize: 18, fontWeight: 'bold', marginBottom: 10, color: '#262626' }}>
-                    Nima haqida?
-                </Text>
-
-                <Text style={{ color: '#717171' }}>
-                    Alisher Navoiy juda yaxshi inson bo'lgan. Test for test, test for test
+                    {book.description}
                 </Text>
             </View>
         </ScrollView>
