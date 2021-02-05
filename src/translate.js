@@ -1,5 +1,5 @@
 const uz = {
-    works: 'Qo`l yozma',
+    works: 'Qo\'l yozma',
     all: 'Hammasi',
     info1: '(1441 yil,9–fevral – 1501 yil, 3–yanvar)\n'
         + 'Alisher Navoiy 1441–yil 9–fevralda Amir Temurning oʻgli Shohruh Mirzo shohligi davrida Hirotda\n'
@@ -128,8 +128,11 @@ const uz = {
     notFountFavourite: 'Siz xozircha birorta ham kitobni sevimlilar ro`yhatiga qo`shmadingiz 💔',
     settings: 'Sozlamalar',
     about: 'Nima haqida?',
+    language: 'O\'zbek',
+    changeLanguage: 'Tilni almashtirish',
 }
 const ru = {
+    changeLanguage: 'Изменить язык',
     about: 'О чем?',
     notFountFavourite: 'Вы еще не добавили ни одной книги в список избранного 💔',
     lit: 'Литература',
@@ -263,8 +266,11 @@ const ru = {
     readBook: 'Читая книгу',
     search: 'Поиск...',
     settings: 'Настройки',
+    language: 'Русский',
 }
 const en = {
+    changeLanguage: 'Change language',
+    language: 'English',
     about: 'About what?',
     settings: 'Settings',
     notFountFavourite: 'You have not added any book to your list of favorites yet 💔',

@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { View, StyleSheet, Text, ScrollView, Image, TouchableOpacity } from 'react-native'
+import React, { useContext, useState } from 'react'
+import { View, StyleSheet, Text, ScrollView, Image, TouchableOpacity, Modal, TouchableWithoutFeedback } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import * as Icon from 'react-native-feather'
 import Container from '../components/common/Container'
@@ -13,17 +13,20 @@ import { n } from '../utils/normalize'
 import { Icon1, Icon2, Icon3, Icon4 } from '../components/Svgs'
 import useTrans from '../hooks/trans'
 import { maxLength } from '../utils/maxLength'
+import { GlobalContext } from '../contexts/GlobalContext'
 
 export default function MainTab() {
     const navigation = useNavigation()
     const [search, setSearch] = useState('')
     const t = useTrans()
+    const [modal, setModal] = useState(false)
+    const { setLang, lang } = useContext(GlobalContext)
 
     useTabBarHeader({
         title: 'Asosiy',
         headerTitleAlign: 'center',
         headerLeft: () => (
-            <TouchableOpacity onPress={() => navigation.navigate('Settings')} style={{ marginLeft: 30 }}>
+            <TouchableOpacity onPress={() => setModal(true)} style={{ marginLeft: 30 }}>
                 <Icon.Settings color="black" />
             </TouchableOpacity>
         ),
@@ -96,6 +99,12 @@ export default function MainTab() {
     ]
 
     const searchResults = books.filter((item) => item.name.includes(search))
+
+    const languages = [
+        { name: 'O\'zbek', value: 'uz' },
+        { name: 'Русский', value: 'ru' },
+        { name: 'English', value: 'en' },
+    ]
 
     return (
         <ScrollView style={{ flex: 1 }}>
@@ -192,6 +201,42 @@ export default function MainTab() {
                         ))}
                     </View>
                 )}
+
+                <Modal animationType="slide" transparent visible={modal}>
+                    <TouchableWithoutFeedback onPress={() => setModal(false)}>
+                        <View style={styles.centeredView}>
+                            <View style={styles.modalView}>
+                                <View style={styles.modalContent}>
+                                    <Text style={styles.itemName}>
+                                        {t('changeLanguage')}
+                                    </Text>
+
+                                    <View style={styles.feedBack}>
+                                        {languages.map((item) => (
+                                            <TouchableOpacity key={item.value} onPress={() => setLang(item.value)}>
+                                                <View
+                                                    style={item.value !== lang ? (
+                                                        { ...styles.more, marginLeft: 0 }
+                                                    ) : ({
+                                                        ...styles.more,
+                                                        backgroundColor: '#191723',
+                                                        marginLeft: 0,
+                                                    })}>
+                                                    <Text
+                                                        style={item.value === lang ? (
+                                                            { color: 'white' }
+                                                        ) : ({ color: 'black' })}>
+                                                        {item.name}
+                                                    </Text>
+                                                </View>
+                                            </TouchableOpacity>
+                                        ))}
+                                    </View>
+                                </View>
+                            </View>
+                        </View>
+                    </TouchableWithoutFeedback>
+                </Modal>
             </Container>
         </ScrollView>
     )
@@ -264,5 +309,92 @@ const styles = StyleSheet.create({
         width: 90,
         height: 135,
     },
-
+    centeredView: {
+        flex: 1,
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+        marginTop: 50,
+    },
+    modalView: {
+        width: '95%',
+        padding: 10,
+        marginBottom: 80,
+        backgroundColor: 'white',
+        borderRadius: 20,
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
+    },
+    imageFormat: {
+        width: 95,
+        height: 90,
+        borderRadius: 15,
+    },
+    openButton: {
+        width: 130,
+        height: 43,
+        justifyContent: 'center',
+        marginLeft: 20,
+        backgroundColor: 'orange',
+        borderRadius: 50,
+    },
+    textStyle: {
+        color: 'white',
+        fontWeight: 'bold',
+        textAlign: 'center',
+    },
+    modalText: {
+        marginBottom: 15,
+        textAlign: 'center',
+    },
+    modalContent: {
+        flexDirection: 'column',
+    },
+    feedBack: {
+        flexDirection: 'row',
+    },
+    more: {
+        width: 100,
+        height: 25,
+        marginTop: 10,
+        marginLeft: 5,
+        backgroundColor: colors.WHITER,
+        borderRadius: 20,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    itemName: {
+        fontSize: 18,
+        marginVertical: 5,
+        fontWeight: 'bold',
+    },
+    itemRating: {
+        width: 15,
+        height: 15,
+    },
+    noImage: {
+        width: 0,
+        height: 0,
+    },
+    defaultImgContainer: {
+        width: 90,
+        height: 90,
+        borderRadius: 15,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: colors.WHITER,
+    },
+    defImg: {
+        width: 40,
+        height: 40,
+    },
 })
