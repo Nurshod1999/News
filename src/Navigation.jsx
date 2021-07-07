@@ -14,8 +14,9 @@ import { GlobalContext } from './contexts/GlobalContext'
 import WorksList from './screens/WorksList'
 import PDF from './screens/PDF'
 import WorkDetail from './screens/WorkDetail'
-import Gazal from './screens/Gazal'
+import Posts from './screens/Posts'
 import useTrans from './hooks/trans'
+import Login from './screens/Login'
 
 const Stack = createStackNavigator()
 const Tab = createBottomTabNavigator()
@@ -28,6 +29,7 @@ export default function Navigation() {
         <NavigationContainer theme={{ colors: { background: 'white' } }}>
             <Stack.Navigator initialRouteName="TabScreen" screenOptions={{ headerStyle: styles.stackHeader }}>
                 <Stack.Screen name="TabScreen" component={TabScreen} options={headerOptions} />
+                <Stack.Screen name="Login" component={Login} options={headerOptions} />
                 <Stack.Screen name="WorkDetail" component={WorkDetail} options={{
                     headerShown: false,
                 }} />
@@ -52,7 +54,7 @@ function TabScreen() {
                 tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} icon={Icon.Heart} />,
             }} />
 
-            <Tab.Screen name="Gazal" component={Gazal} options={{
+            <Tab.Screen name="Posts" component={Posts} options={{
                 tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} icon={Icon.FileText} />,
             }} />
 

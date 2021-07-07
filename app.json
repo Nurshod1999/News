@@ -1,12 +1,12 @@
 {
   "expo": {
-    "name": "AlisherNavoiy",
-    "slug": "AlisherNavoiy",
+    "name": "News",
+    "slug": "News",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./src/assets/main-icon.png",
+    "icon": "./src/assets/images/news.jpg",
     "splash": {
-      "image": "./src/assets/main-splash.png",
+      "image": "./src/assets/images/splashnews.jpg",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -21,13 +21,13 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./src/assets/main-icon.png",
+        "foregroundImage": "./src/assets/splashnews.jpg",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.miranshakh.AlisherNavoiy"
+      "package": "com.norovnurshod.news"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/images/splashnews.jpg"
     }
   }
 }

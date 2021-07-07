@@ -12,7 +12,7 @@ export default function FavouritesTab(props) {
     const t = useTrans()
 
     useTabBarHeader({
-        title: 'Sevimlilar',
+        title: 'Избранное',
         headerTitleAlign: 'center',
     })
 

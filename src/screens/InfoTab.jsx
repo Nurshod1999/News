@@ -1,8 +1,7 @@
 import React from 'react'
 import { Image, StyleSheet, View, Text, ScrollView } from 'react-native'
 import Container from '../components/common/Container'
-import logo from '../assets/alisherNavoiy.jpg'
-import ramka from '../assets/ramka.png'
+import logo from '../assets/images/author.jpg'
 import { useTabBarHeader } from '../hooks/helpers'
 import useTrans from '../hooks/trans'
 
@@ -16,58 +15,30 @@ export default function InfoTab() {
         <ScrollView showsVerticalScrollIndicator={false}>
             <View>
                 <Image blurRadius={20} source={logo} style={styles.opacityImage} />
-
                 <View style={styles.logo}>
                     <Image source={logo} style={{
-                        width: 200,
-                        height: 200,
+                        width: 300,
+                        height: 300,
                         borderRadius: 1000,
                     }} />
                 </View>
 
-                <View style={styles.ramka}>
-                    <Image source={ramka} style={{ width: 280, height: 280 }} />
-                </View>
             </View>
 
             <Container>
                 <Text style={styles.name}>{t('title1')}</Text>
 
-                <Text style={styles.biography}>
-                    {t('info1')}
-                    {t('info2')}
-                    {t('info3')}
-                </Text>
-
                 <Text style={styles.biographyTitle}>{t('title2')}</Text>
 
                 <Text style={styles.biography}>
-                    {t('info4')}
+                    {t('info1')}
+                    {/* {t('info2')} */}
                 </Text>
-
                 <Text style={styles.biographyTitle}>{t('title3')}</Text>
-
                 <Text style={styles.biography}>
-                    {t('info5')}
+                    {t('info3')}
                 </Text>
 
-                <Text style={styles.biographyTitle}>{t('title4')}</Text>
-
-                <Text style={styles.biography}>
-                    {t('info6')}
-                </Text>
-
-                <Text style={styles.biographyTitle}>{t('title5')}</Text>
-
-                <Text style={styles.biography}>
-                    {t('info7')}
-                </Text>
-
-                <Text style={styles.biographyTitle}>{t('title6')}</Text>
-
-                <Text style={styles.biography}>
-                    {t('info8')}
-                </Text>
             </Container>
 
             <View style={{ marginBottom: 10 }} />
